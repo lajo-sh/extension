@@ -1,0 +1,48 @@
+{
+	"name": "ext",
+	"version": "0.0.0",
+	"description": "",
+	"main": "index.js",
+	"type": "module",
+	"scripts": {
+		"dev": "NODE_ENV=development rspack --mode development --watch",
+		"build": "NODE_ENV=production rspack --mode production",
+		"format": "biome format --write .",
+		"format:check": "biome format --check .",
+		"lint": "biome lint .",
+		"lint:fix": "biome lint --write ."
+	},
+	"keywords": [],
+	"author": "",
+	"license": "",
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"@rspack/cli": "^1.2.5",
+		"@rspack/core": "^1.2.5",
+		"@swc/core": "^1.10.15",
+		"@tailwindcss/postcss": "^4.0.6",
+		"@types/chrome": "^0.0.304",
+		"@types/d3": "^7.4.3",
+		"@types/react": "^19.0.8",
+		"@types/react-dom": "^19.0.3",
+		"css-loader": "^7.1.2",
+		"globals": "^15.15.0",
+		"postcss": "^8.5.2",
+		"style-loader": "^4.0.0",
+		"tailwindcss": "^4.0.6",
+		"typescript": "^5.7.3"
+	},
+	"dependencies": {
+		"axios": "^1.7.9",
+		"chart.js": "^4.4.8",
+		"d3": "^7.9.0",
+		"dexie": "^4.0.11",
+		"motion": "^12.4.7",
+		"postcss-loader": "^8.1.1",
+		"react": "^19.0.0",
+		"react-chartjs-2": "^5.3.0",
+		"react-dom": "^19.0.0",
+		"react-icons": "^5.4.0",
+		"react-verification-input": "^4.2.2"
+	}
+}
