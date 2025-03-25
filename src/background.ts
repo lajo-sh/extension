@@ -114,6 +114,7 @@ function stripProtocol(url: string): string {
 }
 
 interface CacheEntry {
+  confidence: number;
   isPhishing: boolean;
   timestamp: number;
   explanation?: string;
@@ -168,6 +169,7 @@ interface PhishingCheckResponse {
   code?: string;
   explanation?: string;
   visitedBefore?: boolean;
+  confidence?: number; // Add confidence to the interface
 }
 
 async function apiRequestWithRetry(
@@ -209,153 +211,167 @@ async function apiRequestWithRetry(
 
 chrome.webNavigation.onCompleted.addListener(async (details) => {
   try {
-    chrome.storage.local.get(["active", "token"], async (result) => {
-      try {
-        if (!result.active || !result.token) {
-          return;
-        }
-
-        const url = details.url;
-
-        if (
-          !url ||
-          (!url.startsWith("http://") && !url.startsWith("https://"))
-        ) {
-          return;
-        }
-
-        if (
-          url.startsWith("chrome://") ||
-          url.startsWith("chrome-extension://") ||
-          url.startsWith("moz-extension://") ||
-          url.startsWith("about:")
-        ) {
-          return;
-        }
-
-        const strippedUrl = stripProtocol(url);
-
+    chrome.storage.local.get(
+      ["active", "token", "requiredConfidence"],
+      async (result) => {
         try {
-          const cached = await checkCache(strippedUrl);
-          if (cached) {
-            if (cached.isPhishing) {
-              try {
-                chrome.tabs.update(details.tabId, {
-                  url: `${chrome.runtime.getURL("pages/blocked.html")}?url=${encodeURIComponent(url)}`,
-                });
-              } catch (navigationError) {
-                console.error(
-                  "Failed to navigate to blocked page:",
-                  navigationError,
-                );
+          if (!result.active || !result.token) {
+            return;
+          }
+
+          const requiredConfidence: number =
+            Number.parseFloat(result.requiredConfidence) || 0.8;
+          const url = details.url;
+
+          if (
+            !url ||
+            (!url.startsWith("http://") && !url.startsWith("https://"))
+          ) {
+            return;
+          }
+
+          if (
+            url.startsWith("chrome://") ||
+            url.startsWith("chrome-extension://") ||
+            url.startsWith("moz-extension://") ||
+            url.startsWith("about:")
+          ) {
+            return;
+          }
+
+          const strippedUrl = stripProtocol(url);
+
+          try {
+            const cached = await checkCache(strippedUrl);
+
+            if (cached) {
+              if (
+                cached.isPhishing &&
+                cached.confidence >= requiredConfidence
+              ) {
+                try {
+                  chrome.tabs.update(details.tabId, {
+                    url: `${chrome.runtime.getURL("pages/blocked.html")}?url=${encodeURIComponent(url)}`,
+                  });
+                } catch (navigationError) {
+                  console.error(
+                    "Failed to navigate to blocked page:",
+                    navigationError,
+                  );
+                }
               }
+              return;
             }
-            return;
+          } catch (cacheError) {
+            console.error("Cache check failed:", cacheError);
           }
-        } catch (cacheError) {
-          console.error("Cache check failed:", cacheError);
-        }
 
-        try {
-          const domain = extractDomain(url);
-          const whitelist = await db.whitelist.get(domain);
+          try {
+            const domain = extractDomain(url);
+            const whitelist = await db.whitelist.get(domain);
 
-          if (whitelist) {
-            return;
+            if (whitelist) {
+              return;
+            }
+          } catch (whitelistError) {
+            console.error("Whitelist check failed:", whitelistError);
           }
-        } catch (whitelistError) {
-          console.error("Whitelist check failed:", whitelistError);
-        }
 
-        const whitelisted = await chrome.storage.session.get(
-          `whitelist-${getDomainAndSubdomain(url)}`,
-        );
-
-        console.log(getDomainAndSubdomain(url));
-
-        if (whitelisted[`whitelist-${getDomainAndSubdomain(url)}`]) {
-          return;
-        }
-
-        try {
-          const response = await apiRequestWithRetry(
-            `${BASE_URL}/check-phishing`,
-            "post",
-            { url: strippedUrl },
-            { Authorization: `Bearer ${result.token}` },
+          const whitelisted = await chrome.storage.session.get(
+            `whitelist-${getDomainAndSubdomain(url)}`,
           );
 
-          const data = response as PhishingCheckResponse;
-          if (typeof data.isPhishing !== "boolean") {
-            throw new Error("Invalid API response format");
-          }
+          console.log(getDomainAndSubdomain(url));
 
-          try {
-            await chrome.storage.local.set({
-              [`phishing_check_${strippedUrl}`]: {
-                isPhishing: data.isPhishing,
-                timestamp: Date.now(),
-                explanation: data.explanation,
-              },
-            });
-          } catch (storageError) {
-            console.error("Failed to save to cache:", storageError);
-          }
-
-          if (!data.isPhishing) {
-            if (!data.visitedBefore) {
-              await chrome.storage.session.set({
-                [`visited-before-${getDomainAndSubdomain(url)}`]: true,
-              });
-            }
-
+          if (whitelisted[`whitelist-${getDomainAndSubdomain(url)}`]) {
             return;
           }
 
           try {
-            if (data.code) {
-              const base64 = btoa(data.code);
+            const response = await apiRequestWithRetry(
+              `${BASE_URL}/check-phishing`,
+              "post",
+              { url: strippedUrl },
+              { Authorization: `Bearer ${result.token}` },
+            );
 
-              let blockedUrl = `${chrome.runtime.getURL("pages/blocked.html")}?url=${encodeURIComponent(url)}&code=${base64}`;
+            const data = response as PhishingCheckResponse;
+            if (typeof data.isPhishing !== "boolean") {
+              throw new Error("Invalid API response format");
+            }
+
+            const confidence = data.confidence || 0;
+
+            try {
+              await chrome.storage.local.set({
+                [`phishing_check_${strippedUrl}`]: {
+                  isPhishing: data.isPhishing,
+                  timestamp: Date.now(),
+                  explanation: data.explanation,
+                  confidence: confidence,
+                },
+              });
+            } catch (storageError) {
+              console.error("Failed to save to cache:", storageError);
+            }
+
+            if (!data.isPhishing || confidence < requiredConfidence) {
+              if (!data.visitedBefore) {
+                await chrome.storage.session.set({
+                  [`visited-before-${getDomainAndSubdomain(url)}`]: true,
+                });
+              }
+              return;
+            }
+
+            try {
+              if (data.code) {
+                const base64 = btoa(data.code);
+
+                let blockedUrl = `${chrome.runtime.getURL("pages/blocked.html")}?url=${encodeURIComponent(url)}&code=${base64}`;
+
+                if (data.explanation) {
+                  blockedUrl += `&explanation=${encodeURIComponent(data.explanation)}`;
+                }
+
+                chrome.tabs.update(details.tabId, { url: blockedUrl });
+
+                return;
+              }
+
+              let blockedUrl = `${chrome.runtime.getURL("pages/blocked.html")}?url=${encodeURIComponent(url)}`;
 
               if (data.explanation) {
                 blockedUrl += `&explanation=${encodeURIComponent(data.explanation)}`;
               }
 
               chrome.tabs.update(details.tabId, { url: blockedUrl });
+            } catch (navigationError) {
+              console.error(
+                "Failed to navigate to blocked page:",
+                navigationError,
+              );
 
-              return;
+              try {
+                chrome.tabs.create({
+                  url: chrome.runtime.getURL("pages/blocked.html"),
+                  active: true,
+                });
+              } catch (fallbackError) {
+                console.error(
+                  "Fallback navigation also failed:",
+                  fallbackError,
+                );
+              }
             }
-
-            let blockedUrl = `${chrome.runtime.getURL("pages/blocked.html")}?url=${encodeURIComponent(url)}`;
-
-            if (data.explanation) {
-              blockedUrl += `&explanation=${encodeURIComponent(data.explanation)}`;
-            }
-
-            chrome.tabs.update(details.tabId, { url: blockedUrl });
-          } catch (navigationError) {
-            console.error(
-              "Failed to navigate to blocked page:",
-              navigationError,
-            );
-
-            try {
-              chrome.tabs.create({
-                url: chrome.runtime.getURL("pages/blocked.html"),
-                active: true,
-              });
-            } catch (fallbackError) {
-              console.error("Fallback navigation also failed:", fallbackError);
-            }
+          } catch (apiError) {
+            console.error("Failed to check if URL is phishing:", apiError);
           }
-        } catch (apiError) {
-          console.error("Failed to check if URL is phishing:", apiError);
+        } catch (innerError) {
+          console.error("Error in webNavigation handler:", innerError);
         }
-      } catch (innerError) {
-        console.error("Error in webNavigation handler:", innerError);
-      }
-    });
+      },
+    );
   } catch (outerError) {
     console.error("Fatal error in webNavigation listener:", outerError);
   }

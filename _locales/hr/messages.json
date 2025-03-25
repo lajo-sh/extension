@@ -190,5 +190,35 @@
   },
   "alreadyHaveAccount": {
     "message": "Already have an account? Log in"
+  },
+  "securitySettings": {
+    "message": "Security Settings"
+  },
+  "confidenceThreshold": {
+    "message": "Phishing Detection Threshold"
+  },
+  "confidenceThresholdDescription": {
+    "message": "Lower values will block more potential phishing sites but may increase false positives. Higher values will only block sites that are highly likely to be phishing."
+  },
+  "settingsSaved": {
+    "message": "Settings saved successfully"
+  },
+  "siteBlocked": {
+    "message": "site blocked"
+  },
+  "sitesBlocked": {
+    "message": "sites blocked"
+  },
+  "error": {
+    "message": "An error occurred"
+  },
+  "networkError": {
+    "message": "Network error. Please check your connection."
+  },
+  "authError": {
+    "message": "Authentication error. Please sign in again."
+  },
+  "serverError": {
+    "message": "Server error. Please try again later."
   }
 }

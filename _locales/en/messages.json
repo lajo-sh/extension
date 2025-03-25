@@ -190,5 +190,35 @@
   },
   "alreadyHaveAccount": {
     "message": "Već imate račun? Prijavite se"
+  },
+  "securitySettings": {
+    "message": "Sigurnosne postavke"
+  },
+  "confidenceThreshold": {
+    "message": "Prag otkrivanja phishinga"
+  },
+  "confidenceThresholdDescription": {
+    "message": "Niže vrijednosti blokirat će više potencijalnih phishing stranica, ali mogu povećati lažno pozitivne rezultate. Više vrijednosti blokirat će samo stranice koje su vrlo vjerojatno phishing."
+  },
+  "settingsSaved": {
+    "message": "Postavke uspješno spremljene"
+  },
+  "siteBlocked": {
+    "message": "blokirana stranica"
+  },
+  "sitesBlocked": {
+    "message": "blokiranih stranica"
+  },
+  "error": {
+    "message": "Došlo je do pogreške"
+  },
+  "networkError": {
+    "message": "Greška mreže. Molimo provjerite vašu internetsku vezu."
+  },
+  "authError": {
+    "message": "Greška pri provjeri autentičnosti. Molimo prijavite se ponovno."
+  },
+  "serverError": {
+    "message": "Greška na poslužitelju. Molimo pokušajte ponovno kasnije."
   }
 }

@@ -320,6 +320,33 @@ function App() {
     const [newPassword, setNewPassword] = useState("");
     const [updateError, setUpdateError] = useState<string | null>(null);
     const [updateSuccess, setUpdateSuccess] = useState<string | null>(null);
+    const [confidenceThreshold, setConfidenceThreshold] = useState<number>(0.8);
+    const [confidenceUpdateSuccess, setConfidenceUpdateSuccess] =
+      useState<boolean>(false);
+
+    useEffect(() => {
+      // Load the current confidence threshold
+      chrome.storage.local.get(["requiredConfidence"], (result) => {
+        if (result.requiredConfidence) {
+          setConfidenceThreshold(Number(result.requiredConfidence));
+        }
+      });
+    }, []);
+
+    const handleUpdateConfidence = async (value: number) => {
+      try {
+        setConfidenceThreshold(value);
+        await chrome.storage.local.set({ requiredConfidence: value });
+        setConfidenceUpdateSuccess(true);
+
+        // Hide success message after 3 seconds
+        setTimeout(() => {
+          setConfidenceUpdateSuccess(false);
+        }, 3000);
+      } catch (err) {
+        console.error("Error updating confidence threshold:", err);
+      }
+    };
 
     const handleUpdateProfile = async () => {
       try {
@@ -468,6 +495,47 @@ function App() {
             >
               {chrome.i18n.getMessage("updateProfile")}
             </button>
+          </div>
+        </div>
+
+        <div className="bg-secondary-background p-6 rounded-lg">
+          <h2 className="text-xl mb-4">
+            {chrome.i18n.getMessage("securitySettings") || "Security Settings"}
+          </h2>
+          <div className="space-y-4">
+            <div>
+              <div className="block text-sm text-gray-400 mb-2">
+                {chrome.i18n.getMessage("confidenceThreshold") ||
+                  "Phishing Detection Threshold"}{" "}
+                ({Math.round(confidenceThreshold * 100)}%)
+              </div>
+
+              <div className="flex items-center gap-4">
+                <span className="text-sm text-gray-400">Low</span>
+                <input
+                  type="range"
+                  min="0.5"
+                  max="0.95"
+                  step="0.05"
+                  value={confidenceThreshold}
+                  onChange={(e) =>
+                    handleUpdateConfidence(Number.parseFloat(e.target.value))
+                  }
+                  className="flex-1 h-2 bg-tertiary-background rounded-lg appearance-none cursor-pointer"
+                />
+                <span className="text-sm text-gray-400">High</span>
+              </div>
+              <div className="text-xs text-gray-400 mt-2">
+                {chrome.i18n.getMessage("confidenceThresholdDescription") ||
+                  "Lower values will block more potential phishing sites but may increase false positives. Higher values will only block sites that are highly likely to be phishing."}
+              </div>
+              {confidenceUpdateSuccess && (
+                <div className="text-green-500 text-sm mt-2">
+                  {chrome.i18n.getMessage("settingsSaved") ||
+                    "Settings saved successfully"}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
