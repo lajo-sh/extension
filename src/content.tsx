@@ -5,15 +5,15 @@ import { createRoot } from "react-dom/client";
 import { getDomainAndSubdomain } from "./lib/getDomainAndSubdomain";
 
 const Content: React.FC = () => {
-  const [showOverlay, setShowOverlay] = useState(false);
+  const [showBanner, setShowBanner] = useState(false);
 
   useEffect(() => {
     async function main() {
       const domain = getDomainAndSubdomain(window.location.href);
 
       chrome.storage.session.get(`visited-before-${domain}`, (result) => {
-        if (result[`visited-before-${domain}`]) {
-          setShowOverlay(true);
+        if (!result[`visited-before-${domain}`]) {
+          setShowBanner(true);
         }
       });
     }
@@ -22,12 +22,14 @@ const Content: React.FC = () => {
   }, []);
 
   const handleProceed = () => {
-    setShowOverlay(true);
-
+    setShowBanner(false);
     container.style.display = "none";
+
+    const domain = getDomainAndSubdomain(window.location.href);
+    chrome.storage.session.set({ [`visited-before-${domain}`]: true });
   };
 
-  if (showOverlay) {
+  if (!showBanner) {
     return null;
   }
 
