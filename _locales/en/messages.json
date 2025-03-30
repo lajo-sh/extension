@@ -220,5 +220,11 @@
   },
   "serverError": {
     "message": "Server error. Please try again later."
+  },
+  "high": {
+    "message": "High"
+  },
+  "low": {
+    "message": "Low"
   }
 }

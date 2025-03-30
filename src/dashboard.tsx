@@ -511,7 +511,9 @@ function App() {
               </div>
 
               <div className="flex items-center gap-4">
-                <span className="text-sm text-gray-400">Low</span>
+                <span className="text-sm text-gray-400">
+                  {chrome.i18n.getMessage("low")}
+                </span>
                 <input
                   type="range"
                   min="0.5"
@@ -523,11 +525,12 @@ function App() {
                   }
                   className="flex-1 h-2 bg-tertiary-background rounded-lg appearance-none cursor-pointer"
                 />
-                <span className="text-sm text-gray-400">High</span>
+                <span className="text-sm text-gray-400">
+                  {chrome.i18n.getMessage("high")}
+                </span>
               </div>
               <div className="text-xs text-gray-400 mt-2">
-                {chrome.i18n.getMessage("confidenceThresholdDescription") ||
-                  "Lower values will block more potential phishing sites but may increase false positives. Higher values will only block sites that are highly likely to be phishing."}
+                {chrome.i18n.getMessage("confidenceThresholdDescription")}
               </div>
               {confidenceUpdateSuccess && (
                 <div className="text-green-500 text-sm mt-2">

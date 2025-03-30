@@ -220,5 +220,11 @@
   },
   "serverError": {
     "message": "Greška na poslužitelju. Molimo pokušajte ponovno kasnije."
+  },
+  "high": {
+    "message": "Visoko"
+  },
+  "low": {
+    "message": "Nisko"
   }
 }
