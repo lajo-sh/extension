@@ -1,230 +1,233 @@
 {
-  "extensionName": {
-    "message": "lajo.sh"
-  },
-  "extensionDescription": {
-    "message": "Zaštitite se od phishing napada"
-  },
-  "loginPageTitle": {
-    "message": "Dobrodošli natrag!"
-  },
-  "signupPageTitle": {
-    "message": "Napravite račun"
-  },
-  "emailPlaceholder": {
-    "message": "Unesite svoju email adresu"
-  },
-  "passwordPlaceholder": {
-    "message": "Lozinka"
-  },
-  "loginButton": {
-    "message": "Prijava"
-  },
-  "signupButton": {
-    "message": "Registracija"
-  },
-  "phishingDetected": {
-    "message": "Otkriven Phishing"
-  },
-  "phishingWarning": {
-    "message": "Ova web stranica je označena kao potencijalni phishing pokušaj"
-  },
-  "whySiteBlocked": {
-    "message": "Zašto je ova stranica blokirana?"
-  },
-  "advancedOptions": {
-    "message": "Napredne opcije"
-  },
-  "enterCode": {
-    "message": "Unesite kod koji ste dobili od pouzdanog kontakta za nastavak"
-  },
-  "incorrectCode": {
-    "message": "Neispravan kod"
-  },
-  "continueAnyway": {
-    "message": "Nastavi svejedno"
-  },
-  "popupProtecting": {
-    "message": "Štitimo vas od phishing napada"
-  },
-  "activateButton": {
-    "message": "Aktiviraj zaštitu"
-  },
-  "deactivateButton": {
-    "message": "Deaktiviraj zaštitu"
-  },
-  "settings": {
-    "message": "Postavke"
-  },
-  "welcomeTitle": {
-    "message": "Dobrodošli u lajo.sh!"
-  },
-  "welcomeContent": {
-    "message": "Postavimo vašu anti-phishing zaštitu."
-  },
-  "aboutYouTitle": {
-    "message": "O Vama"
-  },
-  "aboutYouContent": {
-    "message": "Recite nam svoje ime kako bismo personalizirali vaše iskustvo."
-  },
-  "privacyTitle": {
-    "message": "Privatnost na Prvom Mjestu"
-  },
-  "privacyContent": {
-    "message": "Nikada ne prikupljamo niti spremamo vašu povijest pregledavanja. Vaša privatnost nam je prioritet."
-  },
-  "readyTitle": {
-    "message": "Sve je Spremno!"
-  },
-  "readyContent": {
-    "message": "Sada ste zaštićeni od phishing napada. Ostanite sigurni!"
-  },
-  "continueButton": {
-    "message": "Nastavi"
-  },
-  "finishButton": {
-    "message": "Započni"
-  },
-  "fullNamePlaceholder": {
-    "message": "Unesite svoje puno ime"
-  },
-  "enterName": {
-    "message": "Molimo unesite svoje ime"
-  },
-  "saveFailed": {
-    "message": "Spremanje imena nije uspjelo"
-  },
-  "openDashboard": {
-    "message": "Otvori nadzornu ploču"
-  },
-  "dashboard": {
-    "message": "Nadzorna ploča"
-  },
-  "loading": {
-    "message": "Učitavanje..."
-  },
-  "fetchError": {
-    "message": "Neuspjelo dohvaćanje podataka"
-  },
-  "statistics": {
-    "message": "Statistika"
-  },
-  "totalBlocked": {
-    "message": "Ukupno blokiranih stranica"
-  },
-  "blockedSites": {
-    "message": "Blokirane stranice"
-  },
-  "blockedSitesOverTime": {
-    "message": "Blokirane stranice kroz vrijeme"
-  },
-  "recentlyBlocked": {
-    "message": "Nedavno blokirano"
-  },
-  "profileSettings": {
-    "message": "Postavke profila"
-  },
-  "fullName": {
-    "message": "Puno ime"
-  },
-  "email": {
-    "message": "Email"
-  },
-  "currentPassword": {
-    "message": "Trenutna lozinka"
-  },
-  "newPassword": {
-    "message": "Nova lozinka"
-  },
-  "updateProfile": {
-    "message": "Ažuriraj profil"
-  },
-  "trustedUsers": {
-    "message": "Pouzdani korisnici"
-  },
-  "addTrustedUser": {
-    "message": "Dodaj pouzdanog korisnika"
-  },
-  "noTrustedUsers": {
-    "message": "Još nema pouzdanih korisnika"
-  },
-  "add": {
-    "message": "Dodaj"
-  },
-  "remove": {
-    "message": "Ukloni"
-  },
-  "userNotFound": {
-    "message": "Korisnik nije pronađen"
-  },
-  "userAlreadyTrusted": {
-    "message": "Korisnik je već pouzdan"
-  },
-  "currentPasswordPlaceholder": {
-    "message": "Unesite trenutnu lozinku"
-  },
-  "newPasswordPlaceholder": {
-    "message": "Unesite novu lozinku"
-  },
-  "profileUpdateSuccess": {
-    "message": "Profil je uspješno ažuriran"
-  },
-  "updateError": {
-    "message": "Greška pri ažuriranju profila"
-  },
-  "logout": {
-    "message": "Odjava"
-  },
-  "firstTimeVisitTitle": {
-    "message": "Upozorenje"
-  },
-  "firstTimeVisitWarning": {
-    "message": "Vi ste prvi korisnik lajo.sh-a koji je posjetio ovu stranicu. Nije bila skenirana za potencijalne opasnosti. Nastavite s oprezom."
-  },
-  "understandProceed": {
-    "message": "Razumijem, nastavi"
-  },
-  "noAccount": {
-    "message": "Nemate račun? Registrirajte se"
-  },
-  "alreadyHaveAccount": {
-    "message": "Već imate račun? Prijavite se"
-  },
-  "securitySettings": {
-    "message": "Sigurnosne postavke"
-  },
-  "confidenceThreshold": {
-    "message": "Osjetljivost detekcije phishinga"
-  },
-  "confidenceThresholdDescription": {
-    "message": "Niže vrijednosti blokirat će više potencijalnih phishing stranica, ali mogu povećati lažno pozitivne rezultate. Više vrijednosti blokirat će samo stranice koje su vrlo vjerojatno phishing."
-  },
-  "settingsSaved": {
-    "message": "Postavke uspješno spremljene"
-  },
-  "siteBlocked": {
-    "message": "blokirana stranica"
-  },
-  "sitesBlocked": {
-    "message": "blokiranih stranica"
-  },
-  "error": {
-    "message": "Došlo je do pogreške"
-  },
-  "networkError": {
-    "message": "Greška mreže. Molimo provjerite vašu internetsku vezu."
-  },
-  "authError": {
-    "message": "Greška pri provjeri autentičnosti. Molimo prijavite se ponovno."
-  },
-  "serverError": {
-    "message": "Greška na poslužitelju. Molimo pokušajte ponovno kasnije."
-  },
-  "high": {
-    "message": "Visoko"
-  },
-  "low": {
-    "message": "Nisko"
-  }
+	"extensionName": {
+		"message": "lajo.sh"
+	},
+	"extensionDescription": {
+		"message": "Zaštitite se od phishing napada"
+	},
+	"loginPageTitle": {
+		"message": "Dobrodošli natrag!"
+	},
+	"signupPageTitle": {
+		"message": "Napravite račun"
+	},
+	"emailPlaceholder": {
+		"message": "Unesite svoju email adresu"
+	},
+	"passwordPlaceholder": {
+		"message": "Lozinka"
+	},
+	"loginButton": {
+		"message": "Prijava"
+	},
+	"signupButton": {
+		"message": "Registracija"
+	},
+	"phishingDetected": {
+		"message": "Otkriven Phishing"
+	},
+	"phishingWarning": {
+		"message": "Ova web stranica je označena kao potencijalni phishing pokušaj"
+	},
+	"whySiteBlocked": {
+		"message": "Zašto je ova stranica blokirana?"
+	},
+	"advancedOptions": {
+		"message": "Napredne opcije"
+	},
+	"enterCode": {
+		"message": "Unesite kod koji ste dobili od pouzdanog kontakta za nastavak"
+	},
+	"incorrectCode": {
+		"message": "Neispravan kod"
+	},
+	"continueAnyway": {
+		"message": "Nastavi svejedno"
+	},
+	"popupProtecting": {
+		"message": "Štitimo vas od phishing napada"
+	},
+	"activateButton": {
+		"message": "Aktiviraj zaštitu"
+	},
+	"deactivateButton": {
+		"message": "Deaktiviraj zaštitu"
+	},
+	"settings": {
+		"message": "Postavke"
+	},
+	"welcomeTitle": {
+		"message": "Dobrodošli u lajo.sh!"
+	},
+	"welcomeContent": {
+		"message": "Postavimo vašu anti-phishing zaštitu."
+	},
+	"aboutYouTitle": {
+		"message": "O Vama"
+	},
+	"aboutYouContent": {
+		"message": "Recite nam svoje ime kako bismo personalizirali vaše iskustvo."
+	},
+	"privacyTitle": {
+		"message": "Privatnost na Prvom Mjestu"
+	},
+	"privacyContent": {
+		"message": "Nikada ne prikupljamo niti spremamo vašu povijest pregledavanja. Vaša privatnost nam je prioritet."
+	},
+	"readyTitle": {
+		"message": "Sve je Spremno!"
+	},
+	"readyContent": {
+		"message": "Sada ste zaštićeni od phishing napada. Ostanite sigurni!"
+	},
+	"continueButton": {
+		"message": "Nastavi"
+	},
+	"finishButton": {
+		"message": "Započni"
+	},
+	"fullNamePlaceholder": {
+		"message": "Unesite svoje puno ime"
+	},
+	"enterName": {
+		"message": "Molimo unesite svoje ime"
+	},
+	"saveFailed": {
+		"message": "Spremanje imena nije uspjelo"
+	},
+	"openDashboard": {
+		"message": "Otvori nadzornu ploču"
+	},
+	"dashboard": {
+		"message": "Nadzorna ploča"
+	},
+	"loading": {
+		"message": "Učitavanje..."
+	},
+	"fetchError": {
+		"message": "Neuspjelo dohvaćanje podataka"
+	},
+	"statistics": {
+		"message": "Statistika"
+	},
+	"totalBlocked": {
+		"message": "Ukupno blokiranih stranica"
+	},
+	"blockedSites": {
+		"message": "Blokirane stranice"
+	},
+	"blockedSitesOverTime": {
+		"message": "Blokirane stranice kroz vrijeme"
+	},
+	"recentlyBlocked": {
+		"message": "Nedavno blokirano"
+	},
+	"profileSettings": {
+		"message": "Postavke profila"
+	},
+	"fullName": {
+		"message": "Puno ime"
+	},
+	"email": {
+		"message": "Email"
+	},
+	"currentPassword": {
+		"message": "Trenutna lozinka"
+	},
+	"newPassword": {
+		"message": "Nova lozinka"
+	},
+	"updateProfile": {
+		"message": "Ažuriraj profil"
+	},
+	"trustedUsers": {
+		"message": "Pouzdani korisnici"
+	},
+	"addTrustedUser": {
+		"message": "Dodaj pouzdanog korisnika"
+	},
+	"noTrustedUsers": {
+		"message": "Još nema pouzdanih korisnika"
+	},
+	"add": {
+		"message": "Dodaj"
+	},
+	"remove": {
+		"message": "Ukloni"
+	},
+	"userNotFound": {
+		"message": "Korisnik nije pronađen"
+	},
+	"userAlreadyTrusted": {
+		"message": "Korisnik je već pouzdan"
+	},
+	"currentPasswordPlaceholder": {
+		"message": "Unesite trenutnu lozinku"
+	},
+	"newPasswordPlaceholder": {
+		"message": "Unesite novu lozinku"
+	},
+	"profileUpdateSuccess": {
+		"message": "Profil je uspješno ažuriran"
+	},
+	"updateError": {
+		"message": "Greška pri ažuriranju profila"
+	},
+	"logout": {
+		"message": "Odjava"
+	},
+	"firstTimeVisitTitle": {
+		"message": "Upozorenje"
+	},
+	"firstTimeVisitWarning": {
+		"message": "Vi ste prvi korisnik lajo.sh-a koji je posjetio ovu stranicu. Nije bila skenirana za potencijalne opasnosti. Nastavite s oprezom."
+	},
+	"understandProceed": {
+		"message": "Razumijem, nastavi"
+	},
+	"noAccount": {
+		"message": "Nemate račun? Registrirajte se"
+	},
+	"alreadyHaveAccount": {
+		"message": "Već imate račun? Prijavite se"
+	},
+	"securitySettings": {
+		"message": "Sigurnosne postavke"
+	},
+	"confidenceThreshold": {
+		"message": "Osjetljivost detekcije phishinga"
+	},
+	"confidenceThresholdDescription": {
+		"message": "Niže vrijednosti blokirat će više potencijalnih phishing stranica, ali mogu povećati lažno pozitivne rezultate. Više vrijednosti blokirat će samo stranice koje su vrlo vjerojatno phishing."
+	},
+	"settingsSaved": {
+		"message": "Postavke uspješno spremljene"
+	},
+	"siteBlocked": {
+		"message": "blokirana stranica"
+	},
+	"sitesBlocked": {
+		"message": "blokiranih stranica"
+	},
+	"error": {
+		"message": "Došlo je do pogreške"
+	},
+	"networkError": {
+		"message": "Greška mreže. Molimo provjerite vašu internetsku vezu."
+	},
+	"authError": {
+		"message": "Greška pri provjeri autentičnosti. Molimo prijavite se ponovno."
+	},
+	"serverError": {
+		"message": "Greška na poslužitelju. Molimo pokušajte ponovno kasnije."
+	},
+	"high": {
+		"message": "Visoko"
+	},
+	"low": {
+		"message": "Nisko"
+	},
+	"confidence": {
+		"message": "Vjerojatnost phishinga"
+	}
 }

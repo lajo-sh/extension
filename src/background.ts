@@ -118,6 +118,7 @@ interface CacheEntry {
   isPhishing: boolean;
   timestamp: number;
   explanation?: string;
+  code?: string;
 }
 
 const CACHE_EXPIRY_DAYS = 30;
@@ -251,7 +252,7 @@ chrome.webNavigation.onCompleted.addListener(async (details) => {
               ) {
                 try {
                   chrome.tabs.update(details.tabId, {
-                    url: `${chrome.runtime.getURL("pages/blocked.html")}?url=${encodeURIComponent(url)}`,
+                    url: `${chrome.runtime.getURL("pages/blocked.html")}?url=${encodeURIComponent(url)}&code=${cached.code}&confidence=${cached.confidence}`,
                   });
                 } catch (navigationError) {
                   console.error(
@@ -309,6 +310,7 @@ chrome.webNavigation.onCompleted.addListener(async (details) => {
                   timestamp: Date.now(),
                   explanation: data.explanation,
                   confidence: confidence,
+                  code: data.code,
                 },
               });
             } catch (storageError) {
@@ -328,7 +330,7 @@ chrome.webNavigation.onCompleted.addListener(async (details) => {
               if (data.code) {
                 const base64 = btoa(data.code);
 
-                let blockedUrl = `${chrome.runtime.getURL("pages/blocked.html")}?url=${encodeURIComponent(url)}&code=${base64}`;
+                let blockedUrl = `${chrome.runtime.getURL("pages/blocked.html")}?url=${encodeURIComponent(url)}&code=${base64}&confidence=${confidence}`;
 
                 if (data.explanation) {
                   blockedUrl += `&explanation=${encodeURIComponent(data.explanation)}`;

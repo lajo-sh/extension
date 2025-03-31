@@ -43,7 +43,8 @@ function App() {
 
   const correctCode = params.get("code")!;
   const url = params.get("url")!;
-  const explanation = params.get("explanation");
+  const explanation = params.get("explanation")!;
+  const confidence = params.get("confidence")! as unknown as number;
 
   const [translatedExplanation, setTranslatedExplanation] = useState("");
 
@@ -115,6 +116,15 @@ function App() {
                 </div>
               </div>
             )}
+
+            <div className="bg-primary/20 p-4 rounded-md border border-primary/30">
+              <div className="text-gray-300 text-xs">
+                <span className="font-bold">
+                  {chrome.i18n.getMessage("confidence")}
+                </span>
+                : {confidence * 100}%
+              </div>
+            </div>
 
             <button
               type="button"

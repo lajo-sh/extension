@@ -226,5 +226,8 @@
   },
   "low": {
     "message": "Low"
+  },
+  "confidence": {
+    "message": "Confidence"
   }
 }
