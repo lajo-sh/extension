@@ -229,5 +229,26 @@
   },
   "confidence": {
     "message": "Confidence"
+  },
+  "next": {
+    "message": "Next"
+  },
+  "back": {
+    "message": "Back"
+  },
+  "correct": {
+    "message": "Correct"
+  },
+  "incorrect": {
+    "message": "Incorrect"
+  },
+  "quizCompleted": {
+    "message": "Quiz Completed!"
+  },
+  "correctAnswers": {
+    "message": "You got $1 out of $2 questions correct"
+  },
+  "backToCourses": {
+    "message": "Back to Courses"
   }
 }
