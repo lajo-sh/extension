@@ -17,8 +17,11 @@ const config: RspackOptions = {
     onboarding: "./src/onboarding.tsx",
     dashboard: "./src/dashboard.tsx",
     content: "./src/content.tsx",
+    education: "./src/education.tsx",
+    lecture: "./src/lecture.tsx",
+    quiz: "./src/quiz.tsx",
   },
-  devtool: false,
+  devtool: process.env.NODE_ENV === "production" ? false : "inline-source-map",
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
   },
