@@ -6,8 +6,8 @@ import logo from "./assets/logo.png";
 import "./styles/globals.css";
 import axios from "axios";
 import { useAuth } from "./hooks/useAuth";
-import { useTrustedUsers } from "./components/useTrustedUsers";
-import type { TrustedUser } from "./components/useTrustedUsers";
+import { useTrustedUsers } from "./hooks/useTrustedUsers";
+import type { TrustedUser } from "./hooks/useTrustedUsers";
 
 interface BlockedSite {
   url: string;
