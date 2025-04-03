@@ -34,6 +34,9 @@ try {
   console.error("Failed to initialize database schema:", error);
 }
 
+/**
+ * Updates the whitelist database with domains from various sources.
+ */
 async function updateWhitelist() {
   try {
     const lists: string[] = [
@@ -84,6 +87,11 @@ updateWhitelist().catch((error) => {
   console.error("Initial whitelist update failed:", error);
 });
 
+/**
+ * Extracts the domain from a URL.
+ * @param url - The URL to extract the domain from.
+ * @returns The extracted domain, or the original URL if extraction fails.
+ */
 function extractDomain(url: string): string {
   try {
     const urlObject = new URL(url);
@@ -103,6 +111,11 @@ function extractDomain(url: string): string {
   }
 }
 
+/**
+ * Strips the protocol from a URL, returning the hostname and pathname.
+ * @param url - The URL to strip the protocol from.
+ * @returns The URL without the protocol, or the original URL if stripping fails.
+ */
 function stripProtocol(url: string): string {
   try {
     const urlObject = new URL(url);
@@ -124,6 +137,11 @@ interface CacheEntry {
 const CACHE_EXPIRY_DAYS = 30;
 const MS_PER_DAY = 24 * 60 * 60 * 1000;
 
+/**
+ * Checks the local storage cache for a phishing check result for a given domain.
+ * @param domain - The domain to check in the cache.
+ * @returns The cached entry if found and not expired, otherwise null.
+ */
 async function checkCache(domain: string): Promise<CacheEntry | null> {
   try {
     if (!PRODUCTION) {
@@ -173,6 +191,16 @@ interface PhishingCheckResponse {
   confidence?: number; // Add confidence to the interface
 }
 
+/**
+ * Makes an API request with retry logic.
+ * @param url - The URL to make the request to.
+ * @param method - The HTTP method to use.
+ * @param data - The request data (for POST requests).
+ * @param headers - The request headers.
+ * @param retryCount - The current retry count.
+ * @returns The response data.
+ * @throws If the API request fails after all retries.
+ */
 async function apiRequestWithRetry(
   url: string,
   method: "get" | "post",
