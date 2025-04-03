@@ -694,6 +694,12 @@ function App() {
           >
             {chrome.i18n.getMessage("settings")}
           </button>
+          <a
+            href={chrome.runtime.getURL("/pages/education.html")}
+            className="w-full py-2 rounded-lg text-sm transition-colors block hover:bg-tertiary-background text-center"
+          >
+            {chrome.i18n.getMessage("educationalContent")}
+          </a>
         </nav>
 
         <button

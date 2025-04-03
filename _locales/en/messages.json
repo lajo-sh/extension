@@ -250,5 +250,8 @@
   },
   "backToCourses": {
     "message": "Back to Courses"
+  },
+  "educationalContent": {
+    "message": "Educational Content"
   }
 }

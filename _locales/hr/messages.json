@@ -250,5 +250,8 @@
   },
   "backToCourses": {
     "message": "Natrag na tečajeve"
+  },
+  "educationalContent": {
+    "message": "Edukativni sadržaj"
   }
 }
